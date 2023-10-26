@@ -1,14 +1,20 @@
 import React from 'react'
 import { ApiService } from '../services/api.service'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage:React.FC = () => {
+    const navigate = useNavigate()
+
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const request = {
             email: String(e.currentTarget.email.value),
             password: String(e.currentTarget.password.value)
         }
-        ApiService.login(request).then(res => console.log(res))
+        ApiService.login(request).then(res => {
+            localStorage.setItem('token', res.token)
+            navigate('/')
+        })
     }
 
     return (
