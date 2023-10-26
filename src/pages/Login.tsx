@@ -14,6 +14,7 @@ const LoginPage:React.FC = () => {
         ApiService.login(request).then(res => {
             localStorage.setItem('token', res.token)
             navigate('/')
+            alert('Login success')
         })
     }
 
